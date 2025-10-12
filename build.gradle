@@ -1,0 +1,180 @@
+import io.papermc.paperweight.userdev.ReobfArtifactConfiguration
+import org.ajoberstar.grgit.Grgit
+
+plugins {
+    id "java"
+    id("xyz.jpenilla.run-paper") version "2.3.1"
+    id("io.papermc.paperweight.userdev") version "2.0.0-beta.19"
+    id("net.bytebuddy.byte-buddy-gradle-plugin") version "1.17.7"
+    id("com.gradleup.shadow") version "9.0.1"
+    id 'org.ajoberstar.grgit' version '5.0.0'
+    id 'maven-publish'
+}
+
+group = 'me.dnfneca'
+
+// === Get latest tag (fallback to 0.1.0 if none exist) ===
+def git = Grgit.open(currentDir: project.rootDir)
+
+def lastTag;
+if (git.tag.list().size() == 0) {
+    lastTag = "0.0.1"
+} else {
+    lastTag = git.tag.list().findLast().name
+}
+
+def (marketing, major, minor) = (lastTag.replaceFirst(/^v/, '').split(/\./) + ['0', '0', '0']).take(3)
+
+// === Count commits since last tag (build number) ===
+def patch
+try {
+    patch = git.log { range(lastTag, 'HEAD') }.size()
+} catch (ignored) {
+    patch = git.log().size()
+}
+
+def buildFile = file("${rootDir}/.build-number.txt")
+def buildNumber = buildFile.exists() ? buildFile.text.toInteger() + 1 : 1
+buildFile.text = buildNumber.toString()
+
+// === Generate timestamp (UTC ISO-like format) ===
+def timestamp = new Date().format("yyyyMMdd'T'HHmmss", TimeZone.getTimeZone("UTC"))
+
+// === Get current branch name ===
+def branchName = git.branch.current().name.replaceAll('[^a-zA-Z0-9._-]', '_')
+
+// === Compose version string ===
+// Format: major.minor.patch.build+timestamp-branch
+def fileVersion = "${marketing}.${major}.${minor}.${patch}.${buildNumber}+${timestamp}-${branchName}"
+
+version = "${marketing}.${major}.${minor}.${patch}-${branchName}"
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/DNFneca/VBlocks")
+            credentials {
+                username = project.findProperty("gpr.user")
+                password = project.findProperty("gpr.key")
+            }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            from components.java
+            artifactId = 'vblocks'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+    gradlePluginPortal()
+    maven {
+        name = "papermc-repo"
+        url = "https://repo.papermc.io/repository/maven-public/"
+    }
+    maven {
+        name = "sonatype"
+        url = "https://oss.sonatype.org/content/groups/public/"
+    }
+    maven {
+        url "https://repo.dmulloy2.net/repository/public/"
+        name "protocol-lib"
+    }
+    maven {
+        url = "https://repo.aikar.co/content/groups/aikar/"
+        name = "aikar"
+    }
+}
+
+dependencies {
+    paperweight.paperDevBundle("1.21.8-R0.1-SNAPSHOT")
+//    compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
+
+    implementation 'net.bytebuddy:byte-buddy:1.17.7'
+    implementation 'net.bytebuddy:byte-buddy-agent:1.17.7'
+    compileOnly 'net.bytebuddy:byte-buddy:1.17.7'
+    compileOnly 'net.bytebuddy:byte-buddy-agent:1.17.7'
+    annotationProcessor 'net.bytebuddy:byte-buddy:1.17.7'
+    annotationProcessor 'net.bytebuddy:byte-buddy-agent:1.17.7'
+
+
+    implementation "com.google.code.gson:gson:2.13.1"
+    implementation "co.aikar:acf-paper:0.5.1-SNAPSHOT"
+    implementation "org.mongojack:mongojack:5.0.3"
+    shadow "co.aikar:acf-paper:0.5.1-SNAPSHOT"
+
+    compileOnly group: "net.dmulloy2", name: "ProtocolLib", version: "5.4.0"
+    compileOnly("org.projectlombok:lombok:1.18.38")
+    annotationProcessor("org.projectlombok:lombok:1.18.38")
+
+    testCompileOnly("org.projectlombok:lombok:1.18.38")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.38")
+}
+
+jar {
+    enabled = false
+}
+
+shadowJar {
+    archiveClassifier = ''
+    archiveBaseName = project.name
+
+    configurations = [project.configurations.shadow]
+
+    relocate 'co.aikar.commands', 'me.dnfneca.vblocks.acf'
+    relocate 'co.aikar.locales', 'me.dnfneca.vblocks.locales'
+}
+
+tasks {
+    runServer {
+        // Configure the Minecraft version for our task.
+        // This is the only required configuration besides applying the plugin.
+        // Your plugin's jar (or shadowJar if present) will be used automatically.
+        minecraftVersion("1.21")
+    }
+}
+
+def targetJavaVersion = 23
+java {
+    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+
+    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+        options.release.set(targetJavaVersion)
+    }
+}
+
+tasks.processResources {
+    filesMatching("paper-plugin.yml") {
+        expand(
+                version: fileVersion
+        )
+    }
+}
+
+processResources {
+    def props = [version: fileVersion]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('paper-plugin.yml') {
+        expand props
+    }
+}
+
+tasks.publishGprPublicationToGitHubPackagesRepository.dependsOn tasks.shadowJar
+tasks.build.dependsOn tasks.shadowJar
+tasks.jar.enabled = true
+publish.dependsOn build
+
+paperweight.reobfArtifactConfiguration = ReobfArtifactConfiguration.getMOJANG_PRODUCTION()
