@@ -1,0 +1,14 @@
+name: VBlocks
+version: ${version}
+main: me.DNFneca.VBlocks.VBlocks
+bootstrapper: me.DNFneca.VBlocks.CoreBootstrapper.CoreBootstrapper
+api-version: '1.21'
+load: STARTUP
+folia-supported: true
+dependencies:
+  server:
+    ProtocolLib:
+      load: BEFORE
+      required: true
+authors: [ DNFneca ]
+description: VBlocks
