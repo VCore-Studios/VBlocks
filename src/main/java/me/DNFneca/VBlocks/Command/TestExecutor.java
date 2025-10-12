@@ -17,16 +17,12 @@ public class TestExecutor implements BasicCommand {
     public void execute(CommandSourceStack commandSourceStack, String[] args) {
         if (commandSourceStack.getExecutor() instanceof Player player && player.isOp()) {
             new ScrollableHorizontalGUI(Component.text("Horizontal"), 54,
-                    Map.of(0, new GUIItem(Material.STRING, "String"),
-                            1, new GUIItem(Material.STRING, "String"),
-                            4, new GUIItem(Material.STRING, "String"),
-                            16, new GUIItem(Material.STRING, "String"),
-                            30, new GUIItem(Material.STRING, "String"),
-                            32, new GUIItem(Material.STRING, "String"),
-                            35, new GUIItem(Material.STRING, "String"),
-                            37, new GUIItem(Material.STRING, "String"),
-                            40, new GUIItem(Material.STRING, "String"),
-                            52, new GUIItem(Material.STRING, "String")
+                    Map.of(
+                            33, new GUIItem(Material.STRING, "String"),
+                            63, new GUIItem(Material.STRING, "String"),
+                            93, new GUIItem(Material.STRING, "String"),
+                            123, new GUIItem(Material.STRING, "String"),
+                            153, new GUIItem(Material.STRING, "String")
                     )
             ).open(player);
             return;
