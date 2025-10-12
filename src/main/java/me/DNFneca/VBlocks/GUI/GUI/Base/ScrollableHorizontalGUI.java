@@ -51,11 +51,11 @@ public class ScrollableHorizontalGUI extends GUI {
     @Override
     public void open(Player player) {
         int columns = getSize() / 9 - 1;
-        int offset = scrollIndex * 9;
-        for (int row = 0; row < 9; row++) {
+        int offset = scrollIndex * 7;
+        for (int row = 0; row < 7; row++) {
             for (int column = 0; column < columns; column++) {
-                int index = offset + ( row + column * 9);
-                int slot = row + column * 9;
+                int index = offset + (row * columns + column);
+                int slot = row * 7 + column; // moves left→right per row
                 VBlocks.logger.info("index: " + index + ", slot: " + slot);
 
                 if (visibleItems.containsKey(index)) {
