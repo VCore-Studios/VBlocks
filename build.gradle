@@ -53,7 +53,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/DNFneca/VBlocks")
+            url = uri("https://maven.pkg.github.com/VCore-Studios/VBlocks")
             credentials {
                 username = project.findProperty("gpr.user")
                 password = project.findProperty("gpr.key")
