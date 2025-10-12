@@ -18,11 +18,11 @@ public class TestExecutor implements BasicCommand {
         if (commandSourceStack.getExecutor() instanceof Player player && player.isOp()) {
             new ScrollableHorizontalGUI(Component.text("Horizontal"), 54,
                     Map.of(
-                            30, new GUIItem(Material.STRING, "String"),
-                            60, new GUIItem(Material.STRING, "String"),
-                            90, new GUIItem(Material.STRING, "String"),
-                            120, new GUIItem(Material.STRING, "String"),
-                            150, new GUIItem(Material.STRING, "String")
+                            33, new GUIItem(Material.STRING, "String"),
+                            63, new GUIItem(Material.STRING, "String"),
+                            93, new GUIItem(Material.STRING, "String"),
+                            123, new GUIItem(Material.STRING, "String"),
+                            153, new GUIItem(Material.STRING, "String")
                     )
             ).open(player);
             return;

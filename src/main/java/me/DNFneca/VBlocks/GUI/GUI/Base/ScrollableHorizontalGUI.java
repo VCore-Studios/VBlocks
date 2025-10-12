@@ -51,10 +51,11 @@ public class ScrollableHorizontalGUI extends GUI {
     @Override
     public void open(Player player) {
         int rows = getSize() / 9 - 1;
-        for (int row = 0; row < rows; row++) {
-            for (int column = 0; column < 9; column++) {
-                int index = row * 9 + (scrollIndex + column);
-                int slot = row * 9 + column;
+        int offset = scrollIndex * 6;
+        for (int row = 0; row < 9; row++) {
+            for (int column = 0; column < 6; column++) {
+                int index = offset + row * 6 + column;
+                int slot = row + column * 9;
 
                 if (visibleItems.containsKey(index)) {
                     this.getItems().putField(slot, visibleItems.get(index));
