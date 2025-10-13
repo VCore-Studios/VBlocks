@@ -47,7 +47,12 @@ def branchName = git.branch.current().name.replaceAll('[^a-zA-Z0-9._-]', '_')
 // Format: major.minor.patch.build+timestamp-branch
 def fileVersion = "${marketing}.${major}.${minor}.${patch}.${buildNumber}+${timestamp}-${branchName}"
 
-version = "${marketing}.${major}.${minor}.${patch}-${branchName}"
+if (branchName == "main") {
+    version = "${marketing}.${major}.${minor}"
+} else {
+    version = "${marketing}.${major}.${minor}.${patch}-${branchName}"
+}
+
 
 publishing {
     repositories {
