@@ -20,7 +20,7 @@ def lastTag;
 if (git.tag.list().size() == 0) {
     lastTag = "0.0.1"
 } else {
-    lastTag = git.tag.list().last.name
+    lastTag = git.tag.list().last.name.replace("V", "")
 }
 
 def (marketing, major, minor) = (lastTag.replaceFirst(/^v/, '').split(/\./) + ['0', '0', '0']).take(3)
