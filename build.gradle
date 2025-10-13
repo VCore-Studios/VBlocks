@@ -13,14 +13,14 @@ plugins {
 
 group = 'me.dnfneca'
 
-// === Get latest tag (fallback to 0.1.0 if none exist) ===
+// === Get latest tag (fallback to 0.0.1 if none exist) ===
 def git = Grgit.open(currentDir: project.rootDir)
 
 def lastTag;
 if (git.tag.list().size() == 0) {
     lastTag = "0.0.1"
 } else {
-    lastTag = git.tag.list().findLast().name
+    lastTag = git.tag.list().last.name
 }
 
 def (marketing, major, minor) = (lastTag.replaceFirst(/^v/, '').split(/\./) + ['0', '0', '0']).take(3)
@@ -43,8 +43,6 @@ def timestamp = new Date().format("yyyyMMdd'T'HHmmss", TimeZone.getTimeZone("UTC
 // === Get current branch name ===
 def branchName = git.branch.current().name.replaceAll('[^a-zA-Z0-9._-]', '_')
 
-// === Compose version string ===
-// Format: major.minor.patch.build+timestamp-branch
 def fileVersion = "${marketing}.${major}.${minor}.${patch}.${buildNumber}+${timestamp}-${branchName}"
 
 if (branchName == "main") {
