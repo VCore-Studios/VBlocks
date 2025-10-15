@@ -42,6 +42,10 @@ public abstract class ScrollableGUIPanel extends GUIPanel {
         return invisibleItems.getField(slot);
     }
 
+    public boolean canGoNext() {
+        return !(getSize() - (18 + (getSize()/9 - 2) * 2) - show.size() > 0);
+    }
+
     public void next(Player player) {
         scrollIndex++;
         setDirty(true);
@@ -61,6 +65,10 @@ public abstract class ScrollableGUIPanel extends GUIPanel {
         scrollIndex += amount;
         setDirty(true);
         getParent().open(player);
+    }
+
+    public boolean canGoBack() {
+        return !(getSize() - (18 + (getSize()/9 - 2) * 2) - show.size() > 0);
     }
 
     public void back(Player player) {

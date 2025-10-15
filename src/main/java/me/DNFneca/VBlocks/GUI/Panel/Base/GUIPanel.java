@@ -7,6 +7,7 @@ import me.DNFneca.VBlocks.GUI.GUI.GUIOption.GUIOptions;
 import me.DNFneca.VBlocks.GUI.Panel.GUIPanelField.GUIPanelItems;
 import me.DNFneca.VBlocks.GUI.Panel.GUIPanelField.GUIPanelPlacementOptions;
 import me.DNFneca.VBlocks.GUI.Panel.GUIPanelItem.GUIPanelItem;
+import me.DNFneca.VBlocks.GUI.Panel.GUIPanelOption.GUIPanelOptions;
 import me.DNFneca.VBlocks.GUI.Panel.GUIPanelOption.GUIPanelPlaceOption.GUIPanelPlaceOption;
 import me.DNFneca.VBlocks.Manager.CustomPlayerManager;
 import me.DNFneca.VBlocks.Registry.RegistryReference;
@@ -19,14 +20,14 @@ import java.util.Map;
 public abstract class GUIPanel {
     @Getter
     @Setter
-    private int width = 7, height = 6, slotStartingPoint;
+    private int width = 9, height = 6, slotStartingPoint;
     @Getter
     @Setter
     private boolean isDirty = true;
     @Getter
     private final PanelGUI parent;
     @Getter
-    private final GUIOptions guiOptions = new GUIOptions();
+    private final GUIPanelOptions guiOptions = new GUIPanelOptions();
     @Getter
     private final GUIPanelPlacementOptions placementOptions = new GUIPanelPlacementOptions();
 

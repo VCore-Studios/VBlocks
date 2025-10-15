@@ -23,45 +23,33 @@ public class ScrollableHorizontalGUIPanel extends ScrollableGUIPanel {
     @Override
     public void build(Player player) {
         int paddingLeft = getGuiOptions().getPadding_left();
+        int paddingRight = getGuiOptions().getPadding_right();
         int paddingTop = getGuiOptions().getPadding_top();
-        int usableWidth = getWidth() - paddingLeft * 2;
-        int usableHeight = getHeight() - paddingTop * 2;
-        int offset = getScrollIndex() * usableHeight;
-        for (int row = 0; row < getWidth() ; row++) {
+        int paddingBottom = getGuiOptions().getPadding_bottom();
+        int usableHeight = getHeight() - (paddingTop + paddingBottom);
+        int verticalPadding = paddingBottom + paddingTop;
+        int horizontalPadding = paddingLeft + paddingRight;
+        int offset = getScrollIndex() * (getHeight() - (paddingTop + paddingBottom));
+        for (int row = 0; row < getWidth(); row++) {
             for (int column = 0; column < getHeight(); column++) {
-                if (row > usableWidth || column > usableHeight) {
-                    getItems().putField(row + column * getHeight() + column * (9 - getWidth()),
+                int slot = row + column * getWidth() + column * (9 - getWidth());
+
+                if (row > getWidth() - horizontalPadding || column > getHeight() - verticalPadding || row < paddingLeft || column < paddingTop) {
+                    getItems().putField(slot,
                             new GUIPanelItem(
-                                    Material.TWISTING_VINES,
+                                    getGuiOptions().getPaddingMaterial(),
                                     ""
                             )
                     );
                     continue;
                 }
-                if (row < paddingLeft || column < paddingTop) {
-                    getItems().putField(row + column * getHeight() + column * (9 - getWidth()),
-                            new GUIPanelItem(
-                                    Material.TWISTING_VINES,
-                                    ""
-                            )
-                    );
-                }
 
-                int index = offset + row * usableWidth + column;
-                int slot = (row + paddingLeft) + (column + paddingTop) * getWidth() + (column + paddingTop) * (9 - getWidth());
+                int index = offset + (row - paddingLeft) * usableHeight + (column - paddingTop);
 
                 if (getInvisibleItems().containsKey(index)) {
                     getItems().putField(slot, getInvisibleItems().getField(index));
                 } else {
                     getItems().removeField(slot);
-                }
-                if (row < paddingLeft || column < paddingTop) {
-                    getItems().putField(row + column * getHeight() + column * (9 - getWidth()),
-                            new GUIPanelItem(
-                                    Material.TWISTING_VINES,
-                                    ""
-                            )
-                    );
                 }
             }
         }

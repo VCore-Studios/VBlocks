@@ -17,9 +17,12 @@ public class GUIOptions {
     int padding_top = 0;
     @Setter
     int padding_bottom = 0;
-    @Setter
     Material paddingMaterial = Material.TWISTING_VINES;
 
+    public void setPaddingMaterial(Material paddingMaterial) {
+        if (!paddingMaterial.isItem()) throw new IllegalArgumentException("padding material must be item");
+        this.paddingMaterial = paddingMaterial;
+    }
 
     public void setPadding(int padding) {
         this.padding = padding;

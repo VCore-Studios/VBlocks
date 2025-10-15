@@ -63,7 +63,7 @@ public class GUIPanelPlaceOptions {
                             .setPlaceFunction(GUIPanel::getSize)
                             .setGuiItem(new GUIPanelItem(Material.ARROW, "Next")
                                     .addOnClick((gui) -> {
-                                        if (!(gui instanceof ScrollableGUIPanel scrollableGUIPanel)) return;
+                                        if (!(gui instanceof ScrollableGUIPanel scrollableGUIPanel) || scrollableGUIPanel) return;
                                         scrollableGUIPanel.next((Player) scrollableGUIPanel.getParent().getInventory().getViewers().getFirst());
                                     }, ClickType.UNKNOWN)
                                     .addOnClick((gui) -> {
