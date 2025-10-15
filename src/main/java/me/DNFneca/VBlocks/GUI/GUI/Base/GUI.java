@@ -1,6 +1,7 @@
 package me.DNFneca.VBlocks.GUI.GUI.Base;
 
 import lombok.Getter;
+import lombok.Setter;
 import me.DNFneca.VBlocks.Registry.RegistryReference;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
@@ -9,10 +10,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.Inventory;
 import me.DNFneca.VBlocks.VBlocks;
-import me.DNFneca.VBlocks.GUI.GUIField.GUIItems;
-import me.DNFneca.VBlocks.GUI.GUIField.GUIPlacementOptions;
-import me.DNFneca.VBlocks.GUI.GUIOption.GUIOptions;
-import me.DNFneca.VBlocks.GUI.GUIOption.GUIPlaceOption.GUIPlaceOption;
+import me.DNFneca.VBlocks.GUI.GUI.GUIField.GUIItems;
+import me.DNFneca.VBlocks.GUI.GUI.GUIField.GUIPlacementOptions;
+import me.DNFneca.VBlocks.GUI.GUI.GUIOption.GUIOptions;
+import me.DNFneca.VBlocks.GUI.GUI.GUIOption.GUIPlaceOption.GUIPlaceOption;
 import me.DNFneca.VBlocks.Manager.CustomPlayerManager;
 import me.DNFneca.VBlocks.Manager.GUIManager;
 import me.DNFneca.VBlocks.Util.ItemUtils;
@@ -37,6 +38,7 @@ public abstract class GUI {
     @Getter
     private GUI childGUI;
     @Getter
+    @Setter
     private Inventory inventory;
 
     public GUI(Component title, int size) {
@@ -81,7 +83,7 @@ public abstract class GUI {
         }
     }
 
-    private void fillEmptySlots(Player player) {
+    protected void fillEmptySlots(Player player) {
         if (!options.isShouldSetBackground()) return;
         for (int i = 0; i < size; i++) {
             if (!items.containsKey(i)) {
@@ -94,14 +96,14 @@ public abstract class GUI {
         }
     }
 
-    private void placeOption(RegistryReference<GUIPlaceOption> optionReference) {
+    protected void placeOption(RegistryReference<GUIPlaceOption> optionReference) {
         GUIPlaceOption option = optionReference.value();
         Integer slot = option.getPlaceFunction().apply(this);
         if (slot == null || slot < 0 || slot > getSize()) return;
         items.putField(slot, option.getGuiItem());
     }
 
-    private void placeOptions() {
+    protected void placeOptions() {
         if (placementOptions.isEmpty()) return;
         for (RegistryReference<GUIPlaceOption> placement : placementOptions.getFields()) {
             placeOption(placement);

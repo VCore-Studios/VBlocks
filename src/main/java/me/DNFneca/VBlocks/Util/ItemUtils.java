@@ -7,18 +7,12 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import me.DNFneca.VBlocks.GUI.GUIItem.GUIItem;
+import me.DNFneca.VBlocks.GUI.GUI.GUIItem.GUIItem;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
 public class ItemUtils {
-
-    public static boolean isGUIItemWithSpecificName(ItemStack item, String name) {
-        if(item.getItemMeta() == null || !item.getItemMeta().hasDisplayName()) return false;
-        ItemMeta meta = item.getItemMeta();
-        return meta.displayName().equals(Component.text(name).color(TextColor.fromHexString("#ffffff")).decoration(TextDecoration.ITALIC, false));
-    }
 
     public static GUIItem makeItemGUIItem(ItemStack item, String name) {
         if(item == null || name == null || item.getItemMeta() == null) return null;
@@ -49,11 +43,11 @@ public class ItemUtils {
     }
 
     public static ItemStack makeItemOfType(Material material, String name) {
-        return makeItem(new ItemStack(material), name);
+        return makeItem(ItemStack.of(material), name);
     }
 
     public static ItemStack makeItemOfType(Material material) {
-        return makeItem(new ItemStack(material), getFriendlyName(material));
+        return makeItem(ItemStack.of(material), getFriendlyName(material));
     }
 
     public static String getFriendlyName(Material material) {

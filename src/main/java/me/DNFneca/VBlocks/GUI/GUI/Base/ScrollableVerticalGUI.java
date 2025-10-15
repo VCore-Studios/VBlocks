@@ -3,21 +3,16 @@ package me.DNFneca.VBlocks.GUI.GUI.Base;
 import lombok.Getter;
 import lombok.Setter;
 import net.kyori.adventure.text.Component;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import me.DNFneca.VBlocks.GUI.GUIItem.GUIItem;
-import me.DNFneca.VBlocks.GUI.GUIOption.GUIPlaceOption.GUIPlaceOption;
-import me.DNFneca.VBlocks.GUI.GUIOption.GUIPlaceOption.GUIPlaceOptions;
+import me.DNFneca.VBlocks.GUI.GUI.GUIItem.GUIItem;
+import me.DNFneca.VBlocks.GUI.GUI.GUIOption.GUIPlaceOption.GUIPlaceOption;
 import me.DNFneca.VBlocks.Registry.RegistryReference;
 
 import java.util.*;
 
-import static me.DNFneca.VBlocks.GUI.GUIOption.GUIPlaceOption.GUIPlaceOptions.*;
-import static me.DNFneca.VBlocks.GUI.GUIOption.GUIPlaceOption.GUIPlaceOptions.SCROLLABLE_HORIZONTAL_BACK;
-import static me.DNFneca.VBlocks.GUI.GUIOption.GUIPlaceOption.GUIPlaceOptions.SCROLLABLE_HORIZONTAL_NEXT;
-import static me.DNFneca.VBlocks.GUI.GUIOption.GUIPlaceOption.GUIPlaceOptions.SHOULD_PLACE_BACK_TO_DIFFERENT_MENU;
-import static me.DNFneca.VBlocks.GUI.GUIOption.GUIPlaceOption.GUIPlaceOptions.SHOULD_PLACE_SEARCH;
+import static me.DNFneca.VBlocks.GUI.GUI.GUIOption.GUIPlaceOption.GUIPlaceOptions.*;
+import static me.DNFneca.VBlocks.GUI.GUI.GUIOption.GUIPlaceOption.GUIPlaceOptions.SHOULD_PLACE_BACK_TO_DIFFERENT_MENU;
+import static me.DNFneca.VBlocks.GUI.GUI.GUIOption.GUIPlaceOption.GUIPlaceOptions.SHOULD_PLACE_SEARCH;
 
 public class ScrollableVerticalGUI extends GUI {
     @Getter

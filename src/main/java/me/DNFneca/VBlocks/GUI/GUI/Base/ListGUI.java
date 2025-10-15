@@ -4,8 +4,8 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import me.DNFneca.VBlocks.GUI.GUIOption.GUIPlaceOption.GUIPlaceOption;
-import me.DNFneca.VBlocks.GUI.GUIOption.GUIPlaceOption.GUIPlaceOptions;
+import me.DNFneca.VBlocks.GUI.GUI.GUIOption.GUIPlaceOption.GUIPlaceOption;
+import me.DNFneca.VBlocks.GUI.GUI.GUIOption.GUIPlaceOption.GUIPlaceOptions;
 import me.DNFneca.VBlocks.Registry.RegistryReference;
 import me.DNFneca.VBlocks.Util.ItemUtils;
 

@@ -1,4 +1,4 @@
-package me.DNFneca.VBlocks.GUI.GUIItem;
+package me.DNFneca.VBlocks.GUI.GUI.GUIItem;
 
 import lombok.Getter;
 import org.bukkit.Material;
@@ -21,7 +21,9 @@ public class GUIItem {
     private final Map<@NotNull ClickType, @NotNull GUIItemClickEvent> onClickList = new HashMap<>(0);
     @Getter @NotNull
     private GUIItemOptions options = new GUIItemOptions();
+
 //  TODO: Create a GUIItemBuilder to be able to reload item for GUIs dynamically
+
     public GUIItem(@NotNull ItemStack item) {
         this.item = item;
     }

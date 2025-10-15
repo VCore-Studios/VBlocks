@@ -1,10 +1,10 @@
-package me.DNFneca.VBlocks.GUI.GUIOption.GUIPlaceOption;
+package me.DNFneca.VBlocks.GUI.GUI.GUIOption.GUIPlaceOption;
 
 import me.DNFneca.VBlocks.GUI.GUI.Base.*;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
-import me.DNFneca.VBlocks.GUI.GUIItem.GUIItem;
+import me.DNFneca.VBlocks.GUI.GUI.GUIItem.GUIItem;
 import me.DNFneca.VBlocks.Manager.RegistryManager;
 import me.DNFneca.VBlocks.Registry.Registry;
 import me.DNFneca.VBlocks.Registry.RegistryReference;
@@ -28,7 +28,6 @@ public class GUIPlaceOptions {
                             .setGuiItem(new GUIItem(Material.ARROW, "Back")
                                     .addOnClick((gui) -> gui.back((Player) gui.getInventory().getViewers().getFirst()))
                             )
-                            .setVisible(true)
                             .build()
             );
 
@@ -39,7 +38,6 @@ public class GUIPlaceOptions {
                             .setGuiItem(new GUIItem(Material.ARROW, "Exit")
                                     .addOnClick(GUI::closeGUI)
                             )
-                            .setVisible(true)
                             .build()
             );
 
@@ -53,7 +51,6 @@ public class GUIPlaceOptions {
                             .setGuiItem(new GUIItem(Material.ARROW, "Back")
                                     .addOnClick((gui) -> gui.next((Player) gui.getInventory().getViewers().getFirst()))
                             )
-                            .setVisible(true)
                             .build()
             );
 
@@ -71,7 +68,6 @@ public class GUIPlaceOptions {
                             .setGuiItem(new GUIItem(Material.ARROW, "Return to " + temp)
                                     .addOnClick((gui) -> gui.back((Player) gui.getInventory().getViewers().getFirst()))
                             )
-                            .setVisible(true)
                             .build()
             );
 
@@ -88,10 +84,8 @@ public class GUIPlaceOptions {
                                         listGUI.getPlacementOptions().removeField(GUIPlaceOptions.getReference("should_place_search"));
                                         listGUI.setParentGUI(gui);
                                         listGUI.open((Player) gui.getInventory().getViewers().getFirst());
-                                        return;
                                     }))
                             )
-                            .setVisible(true)
                             .build()
             );
 
@@ -105,7 +99,6 @@ public class GUIPlaceOptions {
                                         if (!(gui instanceof ScrollableHorizontalGUI scrollableHorizontalGUI)) return;
                                         scrollableHorizontalGUI.back((Player) scrollableHorizontalGUI.getInventory().getViewers().getFirst(), 7);
                                     }, ClickType.SHIFT_LEFT))
-                            .setVisible(true)
                             .build()
             );
 
@@ -119,7 +112,6 @@ public class GUIPlaceOptions {
                                         if (!(gui instanceof ScrollableHorizontalGUI scrollableHorizontalGUI)) return;
                                         scrollableHorizontalGUI.next((Player) scrollableHorizontalGUI.getInventory().getViewers().getFirst(), 7);
                                     }, ClickType.SHIFT_LEFT))
-                            .setVisible(true)
                             .build()
             );
 
@@ -133,7 +125,6 @@ public class GUIPlaceOptions {
                                         if (!(gui instanceof ScrollableVerticalGUI scrollableVerticalGUI)) return;
                                         scrollableVerticalGUI.back((Player) scrollableVerticalGUI.getInventory().getViewers().getFirst(), 7);
                                     }, ClickType.SHIFT_LEFT))
-                            .setVisible(true)
                             .build()
             );
 
@@ -147,7 +138,6 @@ public class GUIPlaceOptions {
                                         if (!(gui instanceof ScrollableVerticalGUI scrollableVerticalGUI)) return;
                                         scrollableVerticalGUI.next((Player) scrollableVerticalGUI.getInventory().getViewers().getFirst(), 7);
                                     }, ClickType.SHIFT_LEFT))
-                            .setVisible(true)
                             .build()
             );
 }

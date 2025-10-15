@@ -1,4 +1,4 @@
-package me.DNFneca.VBlocks.GUI.GUIItem;
+package me.DNFneca.VBlocks.GUI.GUI.GUIItem;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,9 +10,9 @@ import java.util.function.Consumer;
 @AllArgsConstructor
 @Getter
 public class GUIItemClickEvent {
-    private Consumer<GUI> consumer;
-    private Lore shortDescriptionOfEvent;
-    private GUIItemClickOptions options;
+    private final Consumer<GUI> consumer;
+    private final Lore shortDescriptionOfEvent;
+    private final GUIItemClickOptions options;
 
     public static GUIItemClickEvent of(Consumer<GUI> consumer, Lore lore, GUIItemClickOptions options) {
         return new GUIItemClickEvent(consumer, lore, options);

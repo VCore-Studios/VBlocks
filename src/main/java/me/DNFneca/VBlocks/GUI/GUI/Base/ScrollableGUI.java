@@ -2,7 +2,7 @@ package me.DNFneca.VBlocks.GUI.GUI.Base;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.DNFneca.VBlocks.GUI.GUIItem.GUIItem;
+import me.DNFneca.VBlocks.GUI.GUI.GUIItem.GUIItem;
 import net.kyori.adventure.text.Component;
 
 import java.util.HashMap;

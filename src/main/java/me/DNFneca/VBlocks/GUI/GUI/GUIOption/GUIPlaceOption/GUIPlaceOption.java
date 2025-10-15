@@ -1,16 +1,12 @@
-package me.DNFneca.VBlocks.GUI.GUIOption.GUIPlaceOption;
+package me.DNFneca.VBlocks.GUI.GUI.GUIOption.GUIPlaceOption;
 
 import lombok.Getter;
 import me.DNFneca.VBlocks.GUI.GUI.Base.GUI;
-import me.DNFneca.VBlocks.GUI.GUIItem.GUIItem;
+import me.DNFneca.VBlocks.GUI.GUI.GUIItem.GUIItem;
 
 import java.util.function.Function;
 
 public class GUIPlaceOption {
-    @Getter
-    private boolean isVisible = true;
-    @Getter
-    private boolean isVisibleIfNotStated = false;
     @Getter
     private boolean isEditable = true;
     @Getter
@@ -34,16 +30,6 @@ public class GUIPlaceOption {
 
     public GUIPlaceOption setSearchFunction(Function<String, Void> searchFunction) {
         this.searchFunction = searchFunction;
-        return this;
-    }
-
-    public GUIPlaceOption setVisibleIfNotStated(boolean visibleIfNotStated) {
-        isVisibleIfNotStated = visibleIfNotStated;
-        return this;
-    }
-
-    public GUIPlaceOption setVisible(boolean visible) {
-        isVisible = visible;
         return this;
     }
 

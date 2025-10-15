@@ -1,4 +1,4 @@
-package me.DNFneca.VBlocks.GUI.GUIItem;
+package me.DNFneca.VBlocks.GUI.GUI.GUIItem;
 
 import lombok.Getter;
 import lombok.Setter;

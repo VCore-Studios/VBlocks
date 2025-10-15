@@ -2,18 +2,15 @@ package me.DNFneca.VBlocks.GUI.GUI.Base;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.DNFneca.VBlocks.VBlocks;
 import net.kyori.adventure.text.Component;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import me.DNFneca.VBlocks.GUI.GUIItem.GUIItem;
-import me.DNFneca.VBlocks.GUI.GUIOption.GUIPlaceOption.GUIPlaceOption;
+import me.DNFneca.VBlocks.GUI.GUI.GUIItem.GUIItem;
+import me.DNFneca.VBlocks.GUI.GUI.GUIOption.GUIPlaceOption.GUIPlaceOption;
 import me.DNFneca.VBlocks.Registry.RegistryReference;
-import org.bukkit.event.inventory.ClickType;
 
 import java.util.*;
 
-import static me.DNFneca.VBlocks.GUI.GUIOption.GUIPlaceOption.GUIPlaceOptions.*;
+import static me.DNFneca.VBlocks.GUI.GUI.GUIOption.GUIPlaceOption.GUIPlaceOptions.*;
 
 public class ScrollableHorizontalGUI extends GUI {
     @Getter
