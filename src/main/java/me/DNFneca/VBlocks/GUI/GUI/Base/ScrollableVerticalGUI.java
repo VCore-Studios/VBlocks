@@ -29,9 +29,7 @@ public class ScrollableVerticalGUI extends GUI {
         Optional<Integer> largestKeyOptional = visibleItems.keySet().stream()
                 .max(Integer::compareTo);
 
-        largestKeyOptional.ifPresent(largestIndex -> {
-            scrollIndex = (largestIndex - 5 * 7) / (getSize() / 9);
-        });
+        largestKeyOptional.ifPresent(largestIndex -> scrollIndex = (largestIndex - 5 * 7) / (getSize() / 9));
     }
 
     public ScrollableVerticalGUI(Component title, int size, Map<Integer, GUIItem> pattern) {

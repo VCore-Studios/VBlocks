@@ -60,10 +60,13 @@ public class GUIPanelPlaceOptions {
     public static final RegistryReference<GUIPanelPlaceOption> SCROLLABLE_HORIZONTAL_NEXT =
             GUIPanelPlaceOptions.register("scrollable_horizontal_next",
                     new GUIPanelPlaceOption()
-                            .setPlaceFunction(GUIPanel::getSize)
+                            .setPlaceFunction(guiPanel -> {
+                                if (!(guiPanel instanceof ScrollableGUIPanel scrollableGUIPanel) || !scrollableGUIPanel.canGoNext()) return null;
+                                return guiPanel.getSize();
+                            })
                             .setGuiItem(new GUIPanelItem(Material.ARROW, "Next")
                                     .addOnClick((gui) -> {
-                                        if (!(gui instanceof ScrollableGUIPanel scrollableGUIPanel) || scrollableGUIPanel) return;
+                                        if (!(gui instanceof ScrollableGUIPanel scrollableGUIPanel) || !scrollableGUIPanel.canGoNext()) return;
                                         scrollableGUIPanel.next((Player) scrollableGUIPanel.getParent().getInventory().getViewers().getFirst());
                                     }, ClickType.UNKNOWN)
                                     .addOnClick((gui) -> {
